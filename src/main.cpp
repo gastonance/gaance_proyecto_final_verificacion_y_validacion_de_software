@@ -18,7 +18,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
 
     if (String(topic) == TOPIC_SERVO_COMMAND) {
-        servo_set_angle(message.toInt());
+        control_set_servo_from_mqtt(message.toInt());
     }
 }
 
@@ -58,4 +58,6 @@ void loop() {
     client.publish(TOPIC_SERVO_STATUS, buffer);
 
     delay(1000);
+
+    control_update();
 }
